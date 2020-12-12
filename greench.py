@@ -23,24 +23,25 @@ class MyClient(discord.Client):
             # if this is Greench
             if "The chatting from" in message.content and "got the attention of the Greench!" in message.content:
                 currentTime = time.strftime("%a %x %X %Z")
+                serverName = message.channel.guild.name
                 if len(message.embeds) > 0:
                     if "taunting" in message.embeds[0].thumbnail.url:
                         # react with :snowball_throw:
                         await asyncio.sleep(5)
                         await message.add_reaction('<:snowball_throw:780656490259808266>')
-                        print(currentTime + " " + message.channel.guild.name + " Greench taunting - snowball_throw")
+                        print(currentTime + " " + serverName + " - Greench taunting - snowball_throw")
                         return
                     if "bored" in message.embeds[0].thumbnail.url:
                         # react with :negotiate:
                         await asyncio.sleep(5)
                         await message.add_reaction('<:negotiate:780657414570639421>')
-                        print(currentTime + " " + message.channel.guild.name + " Greench bored - negotiate")
+                        print(currentTime + " " + serverName + " - Greench bored - negotiate")
                         return
                     if "eager" in message.embeds[0].thumbnail.url:
                         # react with :strategise:
                         await asyncio.sleep(5)
                         await message.add_reaction('<:strategise:780657398867296266>')
-                        print(currentTime + " " + message.channel.guild.name + " Greench eager - strategise")
+                        print(currentTime + " " + serverName + " - Greench eager - strategise")
                         return
 
 client = MyClient()
