@@ -3,6 +3,7 @@
 import asyncio
 import os
 import discord
+import time
 from dotenv import load_dotenv
 
 # load environment variables
