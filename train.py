@@ -93,15 +93,15 @@ async def on_message(message):
 
     # if the message is from tatsu
     if message.author.id == tatsuBotId:
-        # if it's for me
-        if myUserName in message.content:
+        # if it's for me and it's a result of pet interaction
+        if myUserName in message.content and "Interacting with Pet" in message.content:
             # if there's embed
             if len(message.embeds) > 0:
                 # if embed title indicates a successful training
-                if "Success" in message.embeds[0].title:
+                if "Training Success!" in message.embeds[0].title:
                     print(message.embeds[0].title)
                 # if embed title indicates a failed training
-                elif "Failed" in message.embeds[0].title:
+                elif "Training Failed!" in message.embeds[0].title:
                     print(message.embeds[0].title)
                     petIsTired = True
 
