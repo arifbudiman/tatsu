@@ -2,8 +2,10 @@
 
 import asyncio
 import os
+from pytz import timezone
+import pytz
 import discord
-import time
+from datetime import datetime
 from dotenv import load_dotenv
 
 # load environment variables
@@ -22,27 +24,23 @@ class MyClient(discord.Client):
         if message.author.id == tatsuBotId:
             # if this is Greench
             if "The chatting from" in message.content and "got the attention of the Greench!" in message.content:
-                currentTime = time.strftime("%a %x %X %Z")
                 serverName = message.channel.guild.name
                 if len(message.embeds) > 0:
-                    if "taunting" in message.embeds[0].thumbnail.url:
-                        # react with :snowball_throw:
-                        await asyncio.sleep(5)
-                        await message.add_reaction('<:snowball_throw:780656490259808266>')
-                        print(currentTime + " " + serverName + " - Greench taunting - snowball_throw")
-                        return
-                    if "bored" in message.embeds[0].thumbnail.url:
-                        # react with :negotiate:
-                        await asyncio.sleep(5)
-                        await message.add_reaction('<:negotiate:780657414570639421>')
-                        print(currentTime + " " + serverName + " - Greench bored - negotiate")
-                        return
-                    if "eager" in message.embeds[0].thumbnail.url:
-                        # react with :strategise:
-                        await asyncio.sleep(5)
-                        await message.add_reaction('<:strategise:780657398867296266>')
-                        print(currentTime + " " + serverName + " - Greench eager - strategise")
-                        return
+                    await asyncio.sleep(10)
+                    try:
+                        currentTime = datetime.now(tz=pytz.utc).astimezone(timezone('US/Pacific')).strftime("%a %x %X %Z")
+                        if "taunting" in message.embeds[0].thumbnail.url:
+                            await message.add_reaction("<:snowball_throw:780656490259808266>")
+                            print(currentTime + " " + serverName + ": taunting - snowball_throw")
+                        elif "bored" in message.embeds[0].thumbnail.url:
+                            await message.add_reaction("<:negotiate:780657414570639421>")
+                            print(currentTime + " " + serverName + ": bored - negotiate")
+                        elif "eager" in message.embeds[0].thumbnail.url:
+                            await message.add_reaction("<:strategise:780657398867296266>")
+                            print(currentTime + " " + serverName + ": eager - strategise")
+                    except Exception as e:
+                        print("ERR: ", e)
+                        raise
 
 client = MyClient()
 client.run(myUserToken, bot=False)
