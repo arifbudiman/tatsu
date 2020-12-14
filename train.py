@@ -33,7 +33,7 @@ class MyClient(discord.Client):
 
         channel = client.get_channel(botChannelId)
         myUserName = client.user.name + "#" + client.user.discriminator
-        restPeriod = math.ceil(18.1132 * maxFatigue)
+        restPeriod = math.ceil(18.3431952663 * maxFatigue)
         attempt = 0
 
         while True:
