@@ -3,7 +3,7 @@
 import asyncio
 import math
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from random import choice
 
 import discord
@@ -39,12 +39,12 @@ class MyClient(discord.Client):
         while True:
             os.system("clear")
             try:
-                print(f"{self.pacificTime()} Attempted {attempt}x.")
+                print(f"{self.pacificTime()} Attempted {attempt}x")
                 if petIsTired == False:
                     attempt += 1
                     await channel.send("t!tg train")
                 elif petIsTired == True:
-                    print("{} Pet is fatigued. Resting for {} seconds.".format(self.pacificTime(), restPeriod))
+                    print("{} Pet is fatigued. Resting until {}".format(self.pacificTime(), self.pacificTime() + timedelta(0, restPeriod)))
                     await asyncio.sleep(restPeriod)
                     petIsTired = False
                     await channel.send("t!tg clean")
@@ -91,7 +91,7 @@ class MyClient(discord.Client):
 
     @staticmethod
     def pacificTime():
-        return datetime.now(tz=pytz.utc).astimezone(timezone('US/Pacific')).strftime("%a %x %X %Z")
+        return datetime.now(tz=pytz.utc).astimezone(timezone('US/Pacific'))
 
 client = MyClient()
 try:
