@@ -44,7 +44,7 @@ class MyClient(discord.Client):
         if message.author.id != tatsuBotId:
             return
 
-        if message.channel.id != botChannelId:
+        if message.channel.id != self.channelId:
             return
 
         # if message is from tatsu
