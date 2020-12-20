@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
+import argparse
 import discord
 import os
 import asyncio
@@ -14,33 +14,28 @@ tatsuBotId = int(os.getenv("TATSUBOT_ID"))
 botChannelId = int(os.getenv("BOT_CHANNEL_ID"))
 fishCount = 0
 
-targetFish = 10
-
 class MyClient(discord.Client):
+
+    targetFish = 10
+    channelId = botChannelId
 
     async def on_ready(self):
 
         attempt = 0
-        channel = client.get_channel(botChannelId)
+        channel = client.get_channel(self.channelId)
 
-        while fishCount < targetFish:
+        while fishCount < self.targetFish:
             os.system("clear")
-            try:
-                attempt += 1
-                print(f"Attempt {attempt}")
-                await channel.send("t!fish")
-
-            except Exception as e:
-                print("ERR: ", e)
-                raise
-
+            attempt += 1
+            print(f"Attempt {attempt}")
+            await channel.send("t!fish")
             interval = choice(range(30, 33))
-            if fishCount < targetFish:
+            if fishCount < self.targetFish:
                 print(f"Waiting for {interval} seconds..")
                 await asyncio.sleep(interval)
 
         print("Done.")
-        sys.exit(0)
+        await client.close()
 
     async def on_message(self, message):
 
@@ -60,5 +55,16 @@ class MyClient(discord.Client):
                 print(f"Fish collected so far: {fishCount}")
                 return
 
+parser = argparse.ArgumentParser(description="""
+This script will perform tatsu fishing.
+""")
+parser.add_argument("--count", help="how many fishes to catch")
+parser.add_argument("--channel", help="channel ID to fish in")
+args = parser.parse_args()
+COUNT = args.count
+CHANNELID = args.channel
+
 client = MyClient()
+client.targetFish = int(COUNT)
+client.channelId = int(CHANNELID)
 client.run(myUserToken, bot=False)
