@@ -34,7 +34,7 @@ class MyClient(discord.Client):
         cycle = 0
         walkAttempt = 0
         channel = client.get_channel(self.channelId)
-        myUserName = client.user.name + "#" + client.user.discriminator
+        self.myUserName = client.user.name + "#" + client.user.discriminator
         restPeriod = math.ceil(18.3431952663 * maxFatigue)
 
         while True:
@@ -50,7 +50,7 @@ class MyClient(discord.Client):
                 await channel.send("t!tg walk")
 
             if self.petIsTired == False:
-                interval = choice(range(5, 8))
+                interval = choice(range(7, 9))
                 print(f"Waiting for {interval} seconds..")
                 await asyncio.sleep(interval)
             elif self.petIsTired == True:
