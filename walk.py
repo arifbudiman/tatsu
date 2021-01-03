@@ -34,6 +34,7 @@ class MyClient(discord.Client):
         cycle = 0
         walkAttempt = 0
         channel = client.get_channel(self.channelId)
+        client.change_presence(afk=True)
         self.myUserName = client.user.name + "#" + client.user.discriminator
         restPeriod = math.ceil(18.3431952663 * maxFatigue)
 
