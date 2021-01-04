@@ -45,7 +45,7 @@ class MyClient(discord.Client):
             await channel.send("t!tg train")
             await asyncio.sleep(choice(range(6, 9)))
 
-        print("{} Pet is fatigued. Stopping".format(self.pacificTime()))
+        print("{} Pet is fatigued. Stopping.".format(self.pacificTime()))
         await client.close()
 
     async def on_message(self, message):
