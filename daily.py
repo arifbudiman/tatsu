@@ -15,7 +15,7 @@ dailyRecipient = os.getenv("DAILY_RECIPIENT")
 class MyClient(discord.Client):
 
     async def on_ready(self):
-        client.change_presence(afk=True)
+        await client.change_presence(afk=True)
         channel = client.get_channel(botChannelId)
         await channel.send("t!quests 1")
         await asyncio.sleep(7)
