@@ -11,10 +11,10 @@ myUserToken = os.getenv("USER_TOKEN")
 botChannelId = int(os.getenv("DAILY_CHANNEL_ID"))
 dailyRecipient = os.getenv("DAILY_RECIPIENT")
 
+
 class MyClient(discord.Client):
 
     async def on_ready(self):
-
         client.change_presence(afk=True)
         channel = client.get_channel(botChannelId)
         await channel.send("t!quests 1")
@@ -24,6 +24,7 @@ class MyClient(discord.Client):
         await channel.send("t!daily " + dailyRecipient)
         print("Done.")
         await client.close()
+
 
 client = MyClient()
 client.run(myUserToken, bot=False)
