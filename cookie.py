@@ -13,6 +13,7 @@ tatsuBotId = int(os.getenv("TATSUBOT_ID"))
 botChannelId = int(os.getenv("BOT_CHANNEL_ID"))
 cookieRecipients = os.getenv("COOKIE_RECIPIENTS").split(",")
 
+
 class MyClient(discord.Client):
 
     channelId = botChannelId
@@ -24,15 +25,16 @@ class MyClient(discord.Client):
         os.system("clear")
 
         for cookieRecipient in cookieRecipients:
-            
+
             print(f"Giving cookie to {cookieRecipient}")
             await channel.send("t!cookie " + cookieRecipient)
-            interval = choice(range(5, 7))
+            interval = choice(range(7, 9))
             print(f"Waiting for {interval} seconds..")
             await asyncio.sleep(interval)
 
         print("Done.")
         await client.close()
+
 
 parser = argparse.ArgumentParser(description="""
 This script will give tatsu cookies.
