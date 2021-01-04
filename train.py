@@ -39,7 +39,7 @@ class MyClient(discord.Client):
         await channel.send("t!tg feed")
         await asyncio.sleep(7)
 
-        print("{} Started training.".format(self.pacificTime()))
+        print("{} Starting training.".format(self.pacificTime()))
 
         while self.petIsTired == False:
             await channel.send("t!tg train")
@@ -76,7 +76,4 @@ class MyClient(discord.Client):
 
 
 client = MyClient()
-try:
-    client.run(myUserToken, bot=False)
-except Exception as e:
-    print(e)
+client.run(myUserToken, bot=False)
