@@ -26,6 +26,7 @@ class MyClient(discord.Client):
     async def on_ready(self):
 
         channel = client.get_channel(botChannelId)
+        await client.change_presence(afk=True)
         self.myUserName = client.user.name + "#" + client.user.discriminator
         restPeriod = math.ceil(18.3431952663 * self.maxFatigue)
         attempt = 0
