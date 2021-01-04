@@ -5,7 +5,6 @@ import math
 import os
 from datetime import datetime, timedelta
 from random import choice
-
 import discord
 import pytz
 from dotenv import load_dotenv
@@ -17,36 +16,31 @@ myUserToken = os.getenv("USER_TOKEN")
 tatsuBotId = int(os.getenv("TATSUBOT_ID"))
 botChannelId = int(os.getenv("BOT_CHANNEL_ID"))
 
-# global variables
-myUserName = ""
-petIsTired = False
-
-# pet characteristics
-maxFatigue = 511
 
 class MyClient(discord.Client):
 
+    myUserName = ""
+    petIsTired = False
+    maxFatigue = 511
+
     async def on_ready(self):
 
-        global petIsTired
-        global myUserName
-
         channel = client.get_channel(botChannelId)
-        myUserName = client.user.name + "#" + client.user.discriminator
-        restPeriod = math.ceil(18.3431952663 * maxFatigue)
+        self.myUserName = client.user.name + "#" + client.user.discriminator
+        restPeriod = math.ceil(18.3431952663 * self.maxFatigue)
         attempt = 0
 
         while True:
             os.system("clear")
             try:
                 print(f"{self.pacificTime()} Attempted {attempt}x")
-                if petIsTired == False:
+                if self.petIsTired == False:
                     attempt += 1
                     await channel.send("t!tg train")
-                elif petIsTired == True:
+                elif self.petIsTired == True:
                     print("{} Pet is fatigued. Resting until {}".format(self.pacificTime(), self.pacificTime() + timedelta(0, restPeriod)))
                     await asyncio.sleep(restPeriod)
-                    petIsTired = False
+                    self.petIsTired = False
                     await channel.send("t!tg clean")
                     await asyncio.sleep(7)
                     await channel.send("t!tg play")
@@ -64,8 +58,6 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
 
-        global petIsTired
-
         if message.author.id == client.user.id:
             return
 
@@ -78,7 +70,7 @@ class MyClient(discord.Client):
         # if the message is from tatsu
         if message.author.id == tatsuBotId:
             # if it's for me and it's a result of pet interaction
-            if myUserName in message.content and "Interacting with Pet" in message.content:
+            if self.myUserName in message.content and "Interacting with Pet" in message.content:
                 # if there's embed
                 if len(message.embeds) > 0:
                     # if embed title indicates a successful training
@@ -87,11 +79,12 @@ class MyClient(discord.Client):
                     # if embed title indicates a failed training
                     elif "Training Failed!" in message.embeds[0].title:
                         print(message.embeds[0].title)
-                        petIsTired = True
+                        self.petIsTired = True
 
     @staticmethod
     def pacificTime():
         return datetime.now(tz=pytz.utc).astimezone(timezone('US/Pacific'))
+
 
 client = MyClient()
 try:
