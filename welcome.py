@@ -29,6 +29,7 @@ class MyClient(discord.Client):
                     if len(message.embeds) > 0:
                         if "Welcome to" in message.embeds[0].title:
                             await message.channel.send("welcome")
+                            print(message.content)
 
 
 client = MyClient()
