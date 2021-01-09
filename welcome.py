@@ -12,6 +12,14 @@ welcomeBotId = int(os.getenv("WELCOME_BOT_ID"))
 
 
 class MyClient(discord.Client):
+
+    counter = 0
+    welcomeMessages = ["<:welkam:759501888646414406>", "welcome", "selamat datang",
+                       "<:welcomedepan:698521074677055538><:welcomebelakang:698521042695618601>", 
+                       "selamat <:welkam:759501888646414406> datang",
+                       "welcome <:welkam:759501888646414406>", 
+                       "<:welkam:759501888646414406> <:welcomedepan:698521074677055538><:welcomebelakang:698521042695618601> <:welkam:759501888646414406>"]
+
     async def on_ready(self):
         await client.change_presence(afk=True)
         channel = client.get_channel(welcomeChannelId)
@@ -28,8 +36,11 @@ class MyClient(discord.Client):
                 if message.content.startswith("Hello"):
                     if len(message.embeds) > 0:
                         if "Welcome to" in message.embeds[0].title:
-                            await message.channel.send("welcome")
+                            welcomeMessage = self.welcomeMessages[self.counter % len(self.welcomeMessages)]
+                            await message.channel.send(welcomeMessage)
                             print(message.content)
+                            print(welcomeMessage)
+                            self.counter += 1
 
 
 client = MyClient()
