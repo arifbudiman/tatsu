@@ -23,32 +23,28 @@ class MyClient(discord.Client):
 
     myUserName = ""
     petIsTired = False
+    targetWalk = 10
+    channelId = botChannelId
 
     async def on_ready(self):
 
         await client.change_presence(afk=True)
-        channel = client.get_channel(botChannelId)
+        channel = client.get_channel(self.channelId)
         self.myUserName = client.user.name + "#" + client.user.discriminator
 
-        print("{} Cleaning.".format(self.pacificTime()))
-        await channel.send("t!tg clean")
-        await asyncio.sleep(7)
-
-        print("{} Playing.".format(self.pacificTime()))
-        await channel.send("t!tg play")
-        await asyncio.sleep(7)
-
         cycle = 0
+        attempt = 0
 
         print("{} Starting walks.".format(self.pacificTime()))
 
-        while self.petIsTired == False:
+        while self.petIsTired == False and attempt < self.targetWalk:
 
             cycle += 1
 
             if cycle % 3 == 1:
                 await channel.send("t!tg feed")
             else:
+                attempt += 1
                 await channel.send("t!tg walk")
 
             await asyncio.sleep(choice(range(7, 9)))
@@ -83,5 +79,16 @@ class MyClient(discord.Client):
         return datetime.now(tz=pytz.utc).astimezone(timezone('US/Pacific'))
 
 
+parser = argparse.ArgumentParser(description="""
+This script takes pet for a walk.
+""")
+parser.add_argument("--count", help="how many times to walk pet")
+parser.add_argument("--channel", help="channel ID to walk pet in")
+args = parser.parse_args()
+COUNT = args.count
+CHANNELID = args.channel
+
 client = MyClient()
+client.targetWalk = int(COUNT)
+client.channelId = int (CHANNELID)
 client.run(myUserToken, bot=False)
