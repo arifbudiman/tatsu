@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import asyncio
 import os
 from datetime import datetime, timedelta
@@ -15,11 +16,16 @@ myUserToken = os.getenv("USER_TOKEN")
 tatsuBotId = int(os.getenv("TATSUBOT_ID"))
 botChannelId = int(os.getenv("BOT_CHANNEL_ID"))
 
+intents = discord.Intents.none()
+intents.guild_messages = True
+
 
 class MyClient(discord.Client):
 
     myUserName = ""
     petIsTired = False
+    targetTrain = 10
+    channelId = botChannelId
 
     async def on_ready(self):
 
@@ -39,9 +45,12 @@ class MyClient(discord.Client):
         await channel.send("t!tg feed")
         await asyncio.sleep(7)
 
+        attempt = 0
+
         print("{} Starting training.".format(self.pacificTime()))
 
-        while self.petIsTired == False:
+        while self.petIsTired == False and attempt < self.targetTrain:
+            attempt += 1
             await channel.send("t!tg train")
             await asyncio.sleep(choice(range(6, 9)))
 
@@ -75,5 +84,16 @@ class MyClient(discord.Client):
         return datetime.now(tz=pytz.utc).astimezone(timezone('US/Pacific'))
 
 
-client = MyClient()
+parser = argparse.ArgumentParser(description="""
+This script trains pet.
+""")
+parser.add_argument("--count", help="how many times to train pet")
+parser.add_argument("--channel", help="channel ID to train pet in")
+args = parser.parse_args()
+COUNT = args.count
+CHANNELID = args.channel
+
+client = MyClient(intents=intents)
+client.targetTrain = int(COUNT)
+client.channelId = int (CHANNELID)
 client.run(myUserToken, bot=False)
