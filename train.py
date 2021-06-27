@@ -96,4 +96,4 @@ CHANNELID = args.channel
 client = MyClient(intents=intents)
 client.targetTrain = int(COUNT)
 client.channelId = int (CHANNELID)
-client.run(myUserToken, bot=False)
+client.run(myUserToken)

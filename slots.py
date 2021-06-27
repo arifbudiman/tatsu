@@ -47,4 +47,4 @@ CHANNELID = args.channel
 client = MyClient()
 client.targetSlots = int(COUNT)
 client.channelId = int(CHANNELID)
-client.run(myUserToken, bot=False)
+client.run(myUserToken)
