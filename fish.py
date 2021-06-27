@@ -52,8 +52,8 @@ class MyClient(discord.Client):
             # if it contains fish
             if "🐟" in message.content or "🐠" in message.content:
                 fishCount += 1
-                print(f"Fish collected so far: {fishCount}")
-                return
+            print(f"Fish collected so far: {fishCount}")
+            return
 
 parser = argparse.ArgumentParser(description="""
 This script will perform tatsu fishing.
@@ -67,4 +67,4 @@ CHANNELID = args.channel
 client = MyClient()
 client.targetFish = int(COUNT)
 client.channelId = int(CHANNELID)
-client.run(myUserToken, bot=False)
+client.run(myUserToken)
