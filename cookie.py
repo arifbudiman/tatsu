@@ -45,4 +45,4 @@ CHANNELID = args.channel
 
 client = MyClient()
 client.channelId = int(CHANNELID)
-client.run(myUserToken, bot=False)
+client.run(myUserToken)
