@@ -17,7 +17,7 @@ class MyClient(discord.Client):
     async def on_ready(self):
         await client.change_presence(afk=True)
         channel = client.get_channel(botChannelId)
-        await channel.send("t!quests 1")
+        await channel.send("t!quests claim")
         await asyncio.sleep(7)
         await channel.send("t!rep " + dailyRecipient)
         await asyncio.sleep(7)
