@@ -25,7 +25,13 @@ class MyClient(discord.Client):
         await asyncio.sleep(7)
         await channel.send("t!daily " + dailyRecipient)
         await asyncio.sleep(7)
+        await channel.send("t!mail claim")
+        await asyncio.sleep(7)
         await channel.send("t!fieldtrip send")
+        await asyncio.sleep(5)
+        await channel.send("1")
+        await asyncio.sleep(5)
+        await channel.send("confirm")
         await client.close()
 
 
