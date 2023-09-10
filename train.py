@@ -33,28 +33,28 @@ class MyClient(discord.Client):
         channel = client.get_channel(botChannelId)
         self.myUserName = client.user.name + "#" + client.user.discriminator
 
-        print("{} Cleaning.".format(self.pacificTime()))
+        # print("{} Cleaning.".format(self.pacificTime()))
         await channel.send("t!tg clean")
         await asyncio.sleep(7)
 
-        print("{} Playing.".format(self.pacificTime()))
+        # print("{} Playing.".format(self.pacificTime()))
         await channel.send("t!tg play")
         await asyncio.sleep(7)
 
-        print("{} Feeding.".format(self.pacificTime()))
+        # print("{} Feeding.".format(self.pacificTime()))
         await channel.send("t!tg feed")
         await asyncio.sleep(7)
 
         attempt = 0
 
-        print("{} Starting training.".format(self.pacificTime()))
+        # print("{} Starting training.".format(self.pacificTime()))
 
         while self.petIsTired == False and attempt < self.targetTrain:
             attempt += 1
             await channel.send("t!tg train")
             await asyncio.sleep(choice(range(6, 9)))
 
-        print("{} Pet is fatigued. Stopping.".format(self.pacificTime()))
+        # print("{} Pet is fatigued. Stopping.".format(self.pacificTime()))
         await client.close()
 
     async def on_message(self, message):

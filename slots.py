@@ -25,14 +25,14 @@ class MyClient(discord.Client):
         while attempt < self.targetSlots:
             os.system("clear")
             attempt += 1
-            print(f"Attempt {attempt}")
+            # print(f"Attempt {attempt}")
             await channel.send("t!slots")
             interval = choice(range(8, 10))
             if attempt < self.targetSlots:
-                print(f"Waiting for {interval} seconds..")
+                # print(f"Waiting for {interval} seconds..")
                 await asyncio.sleep(interval)
 
-        print("Done.")
+        # print("Done.")
         await client.close()
 
 parser = argparse.ArgumentParser(description="""

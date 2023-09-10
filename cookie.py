@@ -26,13 +26,13 @@ class MyClient(discord.Client):
 
         for cookieRecipient in cookieRecipients:
 
-            print(f"Giving cookie to {cookieRecipient}")
+            # print(f"Giving cookie to {cookieRecipient}")
             await channel.send("t!cookie " + cookieRecipient)
             interval = choice(range(7, 9))
-            print(f"Waiting for {interval} seconds..")
+            # print(f"Waiting for {interval} seconds..")
             await asyncio.sleep(interval)
 
-        print("Done.")
+        # print("Done.")
         await client.close()
 
 

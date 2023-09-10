@@ -27,14 +27,14 @@ class MyClient(discord.Client):
         while fishCount < self.targetFish:
             os.system("clear")
             attempt += 1
-            print(f"Attempt {attempt}")
+            # print(f"Attempt {attempt}")
             await channel.send("t!fish")
             interval = choice(range(30, 33))
             if fishCount < self.targetFish:
-                print(f"Waiting for {interval} seconds..")
+                # print(f"Waiting for {interval} seconds..")
                 await asyncio.sleep(interval)
 
-        print("Done.")
+        # print("Done.")
         await client.close()
 
     async def on_message(self, message):
@@ -52,7 +52,7 @@ class MyClient(discord.Client):
             # if it contains fish
             if "🐟" in message.content or "🐠" in message.content:
                 fishCount += 1
-            print(f"Fish collected so far: {fishCount}")
+            # print(f"Fish collected so far: {fishCount}")
             return
 
 parser = argparse.ArgumentParser(description="""

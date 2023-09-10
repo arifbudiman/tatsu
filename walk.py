@@ -35,7 +35,7 @@ class MyClient(discord.Client):
         cycle = 0
         attempt = 0
 
-        print("{} Starting walks.".format(self.pacificTime()))
+        # print("{} Starting walks.".format(self.pacificTime()))
 
         while self.petIsTired == False and attempt < self.targetWalk:
 
@@ -49,7 +49,7 @@ class MyClient(discord.Client):
 
             await asyncio.sleep(choice(range(7, 9)))
 
-        print("{} Pet is fatigued. Stopping.".format(self.pacificTime()))
+        # print("{} Pet is fatigued. Stopping.".format(self.pacificTime()))
         await client.close()
 
     async def on_message(self, message):
