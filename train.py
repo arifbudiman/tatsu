@@ -16,9 +16,8 @@ myUserToken = os.getenv("USER_TOKEN")
 tatsuBotId = int(os.getenv("TATSUBOT_ID"))
 botChannelId = int(os.getenv("BOT_CHANNEL_ID"))
 
-intents = discord.Intents.none()
-intents.guild_messages = True
-
+#intents = discord.Intents.none()
+#intents.guild_messages = True
 
 class MyClient(discord.Client):
 
@@ -93,7 +92,7 @@ args = parser.parse_args()
 COUNT = args.count
 CHANNELID = args.channel
 
-client = MyClient(intents=intents)
+client = MyClient()
 client.targetTrain = int(COUNT)
 client.channelId = int (CHANNELID)
 client.run(myUserToken)
