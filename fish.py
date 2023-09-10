@@ -29,8 +29,8 @@ class MyClient(discord.Client):
             attempt += 1
             # print(f"Attempt {attempt}")
             await channel.send("t!fish")
-            interval = choice(range(30, 33))
             if fishCount < self.targetFish:
+                interval = choice(range(30, 33))
                 # print(f"Waiting for {interval} seconds..")
                 await asyncio.sleep(interval)
             else:
