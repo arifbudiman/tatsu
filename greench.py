@@ -16,7 +16,7 @@ tatsuBotId = int(os.getenv("TATSUBOT_ID"))
 class MyClient(discord.Client):
 
     async def on_ready(self):
-        os.system("clear")
+        # os.system("clear")
         print('Logged on as', self.user)
 
     async def on_message(self, message):
