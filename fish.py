@@ -33,6 +33,8 @@ class MyClient(discord.Client):
             if fishCount < self.targetFish:
                 # print(f"Waiting for {interval} seconds..")
                 await asyncio.sleep(interval)
+            else:
+                break
 
         # print("Done.")
         await client.close()
