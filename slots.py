@@ -23,7 +23,7 @@ class MyClient(discord.Client):
         channel = client.get_channel(self.channelId)
 
         while attempt < self.targetSlots:
-            os.system("clear")
+            # os.system("clear")
             attempt += 1
             # print(f"Attempt {attempt}")
             await channel.send("t!slots")
