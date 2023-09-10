@@ -25,7 +25,7 @@ class MyClient(discord.Client):
         channel = client.get_channel(self.channelId)
 
         while fishCount < self.targetFish:
-            os.system("clear")
+            # os.system("clear")
             attempt += 1
             # print(f"Attempt {attempt}")
             await channel.send("t!fish")
