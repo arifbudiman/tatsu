@@ -22,7 +22,7 @@ class MyClient(discord.Client):
 
         channel = client.get_channel(self.channelId)
 
-        os.system("clear")
+        # os.system("clear")
 
         for cookieRecipient in cookieRecipients:
 
